@@ -12,8 +12,11 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    public UsuarioService(UsuarioRepository usuarioRepository){
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    private final UsuarioRepository usuarioRepository;
 
     public List<UsuarioModel> buscarTodosOsUsuarios() {
         return usuarioRepository.findAll();
@@ -23,8 +26,9 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioModel);
     }
 
-    public Optional<UsuarioModel> buscarUsuarioPorId(Long id){
-        return usuarioRepository.findById(id);
+    public UsuarioModel buscarUsuarioPorId(Long id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
     }
 
     public UsuarioModel atualizarUsuario (Long id, UsuarioModel usuarioModel){
