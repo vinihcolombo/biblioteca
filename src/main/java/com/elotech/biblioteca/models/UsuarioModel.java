@@ -16,12 +16,12 @@ public class UsuarioModel {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(max = 100)
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @NotNull
+    @NotBlank
     @Email
     @Size(max = 100)
     @Column(unique = true, nullable = false, length = 100)
@@ -32,7 +32,7 @@ public class UsuarioModel {
     @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
 
-    @NotNull
+    @NotBlank
     @Size(max = 20)
     @Column(nullable = false, length = 20)
     @Pattern(

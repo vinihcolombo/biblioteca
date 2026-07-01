@@ -15,19 +15,19 @@ public class LivroModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(max = 200)
     @Column(nullable = false, length = 200)
     private String titulo;
 
-    @NotNull
+    @NotBlank
     @Size(max = 100)
     @Column(nullable = false, length = 100)
     private String autor;
 
-    @NotNull
+    @NotBlank
     @Size(max = 20)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String isbn;
 
     @NotNull
