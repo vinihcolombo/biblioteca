@@ -2,14 +2,12 @@ package com.elotech.biblioteca.controllers;
 
 import com.elotech.biblioteca.models.UsuarioModel;
 import com.elotech.biblioteca.services.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -40,7 +38,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarUsuarioPorId(@PathVariable Long id){
+    public ResponseEntity<Void> deletarUsuarioPorId(@PathVariable Long id){
         usuarioService.excluirUsuario(id);
         return ResponseEntity.noContent().build();
     }
@@ -58,6 +56,4 @@ public class UsuarioController {
     {
         return ResponseEntity.ok(usuarioService.atualizarUsuario(id, usuarioModel));
     }
-
-
 }

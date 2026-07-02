@@ -1,8 +1,10 @@
 package com.elotech.biblioteca.models;
 
+import com.elotech.biblioteca.enums.LivroCategoria;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -28,11 +30,20 @@ public class LivroModel {
     @NotBlank
     @Size(max = 20)
     @Column(nullable = false, length = 20, unique = true)
+    @Pattern(
+            regexp = "^(\\d{9}[\\dXx]|\\d{13})$",
+            message = "ISBN inválido"
+    )
     private String isbn;
 
     @NotNull
     @Column(nullable = false, name = "data_publicacao")
     private LocalDate dataPublicacao;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(nullable = false)
+    private LivroCategoria categoria;
 
     public Long getId() {
         return id;
