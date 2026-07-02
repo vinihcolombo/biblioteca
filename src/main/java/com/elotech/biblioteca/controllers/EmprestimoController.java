@@ -14,20 +14,16 @@ import java.util.List;
 @RequestMapping("/emprestimos")
 public class EmprestimoController {
 
-    public EmprestimoController(EmprestimoService emprestimoService){
+    private final EmprestimoService emprestimoService;
+
+    public EmprestimoController(EmprestimoService emprestimoService) {
         this.emprestimoService = emprestimoService;
     }
 
-    private final EmprestimoService emprestimoService;
-
-    @GetMapping
-    public ResponseEntity<List<EmprestimoModel>> buscarTodosOsEmprestimos(){
-        List<EmprestimoModel> request = emprestimoService.buscarTodosOsEmprestimos();
-        return ResponseEntity.ok().body(request);
-    }
-
     @PostMapping
-    public ResponseEntity<EmprestimoModel> criarEmprestimo(@Valid @RequestBody EmprestimoModel emprestimoModel){
+    public ResponseEntity<EmprestimoModel> criarEmprestimo(
+            @Valid @RequestBody EmprestimoModel emprestimoModel) {  // ← ENTIDADE, não DTO!
+
         EmprestimoModel request = emprestimoService.criarEmprestimo(emprestimoModel);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
@@ -38,25 +34,28 @@ public class EmprestimoController {
         return ResponseEntity.created(uri).body(request);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarEmprestimoPorId(@Valid @PathVariable Long id){
-        emprestimoService.excluirEmprestimo(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping
+    public ResponseEntity<List<EmprestimoModel>> buscarTodosOsEmprestimos() {
+        List<EmprestimoModel> request = emprestimoService.buscarTodosOsEmprestimos();
+        return ResponseEntity.ok(request);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmprestimoModel> buscarEmprestimoPorId(@Valid @PathVariable Long id){
+    public ResponseEntity<EmprestimoModel> buscarEmprestimoPorId(@PathVariable Long id) {
         EmprestimoModel emprestimo = emprestimoService.buscarEmprestimoPorId(id);
         return ResponseEntity.ok(emprestimo);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EmprestimoModel> atualizarEmprestimo(
-            @Valid
             @PathVariable Long id,
-            @RequestBody EmprestimoModel emprestimoModel)
-    {
+            @RequestBody EmprestimoModel emprestimoModel) {
         return ResponseEntity.ok(emprestimoService.atualizarEmprestimo(id, emprestimoModel));
     }
-    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarEmprestimoPorId(@PathVariable Long id) {
+        emprestimoService.excluirEmprestimo(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -20,6 +20,14 @@ public class LivroService {
     }
 
     public LivroModel criarLivro (LivroModel livroModel){
+        System.out.println("=== DADOS RECEBIDOS ===");
+        System.out.println("Autor: " + livroModel.getAutor());
+        System.out.println("Titulo: " + livroModel.getTitulo());
+        System.out.println("ISBN: " + livroModel.getIsbn());
+        System.out.println("Data: " + livroModel.getDataPublicacao());
+        System.out.println("Categoria: " + livroModel.getCategoria()); // ← Verifique se é FICCAO
+        System.out.println("========================");
+
         return livroRepository.save(livroModel);
     }
 

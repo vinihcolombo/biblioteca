@@ -10,7 +10,8 @@ import java.time.LocalDate;
 public class EmprestimoModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emprestimo_seq")
+    @SequenceGenerator(name = "emprestimo_seq", sequenceName = "emprestimo_sequence", allocationSize = 1)
     private Long id;
 
     @NotNull

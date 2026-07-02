@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class LivroModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "livro_seq")
+    @SequenceGenerator(name = "livro_seq", sequenceName = "livro_sequence", allocationSize = 1)
     private Long id;
 
     @NotBlank
@@ -83,5 +84,13 @@ public class LivroModel {
 
     public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    public LivroCategoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(LivroCategoria categoria) {
+        this.categoria = categoria;
     }
 }

@@ -39,20 +39,23 @@ public class LivroController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarLivroPorId(@Valid @PathVariable Long id){
+    public ResponseEntity<Void> deletarLivroPorId(@PathVariable Long id){
         livroService.excluirLivro(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LivroModel> buscarLivroPorId(@Valid @PathVariable Long id){
+    public ResponseEntity<LivroModel> buscarLivroPorId(@PathVariable Long id){
+        try {
         LivroModel livro = livroService.buscarLivroPorId(id);
         return ResponseEntity.ok(livro);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<LivroModel> atualizarLivro(
-            @Valid
             @PathVariable Long id,
             @RequestBody LivroModel livroModel)
     {
