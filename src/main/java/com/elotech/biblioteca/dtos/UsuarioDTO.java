@@ -1,7 +1,10 @@
 package com.elotech.biblioteca.dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDate;
 
+@Schema(description = "Dados de criação de usuário")
 public class UsuarioDTO {
     private Long id;
     private String nome;

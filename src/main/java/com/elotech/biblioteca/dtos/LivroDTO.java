@@ -1,14 +1,18 @@
 package com.elotech.biblioteca.dtos;
 
+import com.elotech.biblioteca.enums.LivroCategoria;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDate;
 
+@Schema(description = "Dados de criação de livro")
 public class LivroDTO {
     private Long id;
     private String titulo;
     private String autor;
     private String isbn;
     private LocalDate dataPublicacao;
-    private String categoria;
+    private LivroCategoria categoria;
 
     // Getters e Setters
     public Long getId() { return id; }
@@ -26,6 +30,6 @@ public class LivroDTO {
     public LocalDate getDataPublicacao() { return dataPublicacao; }
     public void setDataPublicacao(LocalDate dataPublicacao) { this.dataPublicacao = dataPublicacao; }
 
-    public String getCategoria() { return categoria; }
-    public void setCategoria(String categoria) { this.categoria = categoria; }
+    public LivroCategoria getCategoria() { return categoria; }
+    public void setCategoria(LivroCategoria categoria) { this.categoria = categoria; }
 }

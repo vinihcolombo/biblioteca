@@ -1,9 +1,11 @@
 package com.elotech.biblioteca.dtos;
 
 import com.elotech.biblioteca.enums.EmprestimoStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Schema(description = "Dados de criação da requisição de impréstimo")
 public class EmprestimoRequestDTO {
 
     @NotNull(message = "ID do usuário é obrigatório")
